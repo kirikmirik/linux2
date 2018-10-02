@@ -24,17 +24,17 @@ sudo ./med
 ##### comannds
 + add phone book item
 ```sh
-> add name last_name phnumber
+add name last_name phnumber
 ```
 + delete phone book item with last_name
 ```sh
-> delete last_name
+delete last_name
 ```
 + printk phone book item with last_name
 ```sh
-> info last_name
+info last_name
 ```
 + exit
 ```sh
-> exit
+exit
 ```

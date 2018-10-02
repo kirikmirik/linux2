@@ -1,0 +1,42 @@
+#!/bin/sh
+
+function usage()
+{
+	cat <<-EOF
+	Usage: phbctl COMMAND
+
+	Possible values for COMMAND are:
+		build
+		clean
+		insert
+		remove
+EOF
+}
+
+if [ "$#" -ne 1 ]; then
+    echo "phbctl: wrong number of arguments"
+    usage
+fi
+
+COMMAND=$1
+case ${COMMAND} in
+build)
+    make
+    ;;
+clean)
+    make clean
+    ;;
+insert)
+    insmod phonebook.ko
+    mknod -m 0666 /dev/phonebook c \
+            $(cat /proc/devices | grep phonebook | awk '{print $1}') 0
+    ;;
+remove)
+    rmmod phonebook 
+    rm /dev/phonebook
+    ;;
+*)
+    echo "phbctl: wrong command"
+    usage
+    ;;
+esac
